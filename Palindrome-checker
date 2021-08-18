@@ -1,6 +1,6 @@
 /**
   * check whether a string is the same backwards as forwards
-  * NOTE: ignores punctuation characters.
+  * NOTE: ignores punctuation characters, and letter case.
   * input a string
   * returns boolean: true if input is a palindrome, false if it's not.
   */
