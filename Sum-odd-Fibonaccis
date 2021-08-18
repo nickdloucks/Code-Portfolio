@@ -1,0 +1,30 @@
+/**
+  * This function calculates the sum of all odd fibonacci numbers up to a given maximum.
+  * input: integer
+  * output: sum of odd fibonacci sequence numbers below the input
+  */
+
+function sumFibs(num) {
+  let fibs = [1, 1];
+  console.log(fibs);
+  const nextFib = function(){
+    return fibs[0] + fibs[1];
+  }
+  //console.log(nextFib());
+
+  while (nextFib() <= num){
+    fibs.unshift(nextFib());
+    //console.log(fibs);
+  }
+
+  let oddFibs = fibs.filter(function(num){
+    return ((num % 2) != 0);
+  });
+  console.log(oddFibs);
+
+  let sum = oddFibs.reduce((a,b) => a+b);
+  console.log("sum = " + sum);
+  return sum;
+}
+
+sumFibs(75025); // test case
