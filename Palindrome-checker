@@ -7,9 +7,9 @@
 
 
 function palindrome(str) {
-  let testStr = str.toLowerCase(); // copy input to avoid mutation
-  let noPunc = /[^a-z0-9]/ig; //regex for non-word characters like punctuation
-  let badChars = noPunc.test(str); // test the input for characters to ignore. could also check the copy, <testStr>
+  let testStr = str.toLowerCase(); // copy input to avoid mutation, and convert to lowercase to make comparison easier
+  let noPunc = /[^a-z0-9]/ig; //regex for non-word characters like punctuation or spaces
+  let badChars = noPunc.test(testStr); // test the input for characters to ignore.
   if (badChars){ // if there are bad characters, replace them with an empty string, effectively deleting them from the <testStr>
     testStr = testStr.replace(noPunc, "");
     console.log(testStr + " _punctuation removed");
