@@ -1,7 +1,8 @@
-least-common-multiple-euclidian-branch
-
-
-
+  /**
+    *
+    * input: array of two integers
+    * output: single integer that is the lowest common multiple of all numbers in the range between the two input numbers
+    */
 
 function smallestCommons(arr) {
     let range = [];//range of numbers to be divisible by final output
@@ -12,18 +13,18 @@ function smallestCommons(arr) {
     }else if(arr[1]>arr[0]){
       range.push(arr[0]);
       max = arr[1];
-    }else{return arr[0]}// arrange the input values low -> high; or return first number if they are the same
+    }else{return arr[0]}// arrange the input values low to high; or return first number if they are the same
     for(let i=range[0]+1; i<=max; i++){
       range.push(i);
     }// populate range array; these numbers will be factored next
-  function gcf(x,y){
+  function gcf(x,y){ // calculate the greatest common factor for two numbers
       if ((x===0) || (y===0)){
           return (x > y) ? x : y;
       }else{
           return gcf(y, x % y);
       }
   }
-  function lcm(x,y){
+  function lcm(x,y){ // calculate the least common multiple of two numbers
       return (x * y)/gcf(x,y);
   }
   console.log(range.reduce(lcm));
