@@ -1,3 +1,9 @@
+/**
+  * controlled input React component
+  * input: string in input box
+  * output: display input string in an <h2> element
+  */
+
 class MyForm extends React.Component {
   constructor(props) {
     super(props);
@@ -5,7 +11,7 @@ class MyForm extends React.Component {
       input: '',
       submit: ''
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this); // bind event handlers to the instance of this component
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
@@ -14,25 +20,25 @@ class MyForm extends React.Component {
     });
   }
   handleSubmit(event) {
-    // Change code below this line
-    event.preventDefault();
+
+    event.preventDefault(); // keep form sumbission from re-loading page
     this.setState({
-      submit: this.state.input
+      submit: this.state.input // store the new input value in State
     });
-    // Change code above this line
+
   }
-  render() {
+  render() { {/* JSX below */}
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          {/* Change code below this line */}
-          <input value={this.state.input} onChange={this.handleChange}></input>
-          {/* Change code above this line */}
+
+          <input value={this.state.input} onChange={this.handleChange}></input> {/* attach event handler */}
+
           <button type='submit'>Submit!</button>
         </form>
-        {/* Change code below this line */}
-        <h1>{this.state.submit}</h1>
-        {/* Change code above this line */}
+        
+        <h1>{this.state.submit}</h1> {/* display output */}
+        
       </div>
     );
   }
