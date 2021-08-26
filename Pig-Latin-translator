@@ -1,0 +1,23 @@
+/**
+  * translate a given string to Pig-Latin
+  * input: string
+  * output: string in Pig-Latin
+  */
+
+function translatePigLatin(str) {
+  let nStr = str;
+  const consonants = /(^[bcdfghjklmnpqrstvwxyz]+)?/i;
+  let match = nStr.match(consonants);
+  let consCluster = match[0];
+  if (consCluster.length){
+    nStr = nStr.slice(consCluster.length)
+                .concat(consCluster)
+                .concat("ay");
+  }else{
+    nStr = nStr.concat("way");
+  }
+  console.log(nStr);
+  return nStr;
+}
+console.log("");
+translatePigLatin("consonant");
