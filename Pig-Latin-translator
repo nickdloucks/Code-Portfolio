@@ -1,15 +1,16 @@
 /**
   * translate a given string to Pig-Latin
-  * input: string
+  * input: string (word)
   * output: string in Pig-Latin
+  * note: to translate a whole sentence of words, pass this function as a callback after separating the sentance into an array of words
   */
 
 function translatePigLatin(str) {
-  let nStr = str;
-  const consonants = /(^[bcdfghjklmnpqrstvwxyz]+)?/i;
+  let nStr = str; // save copy of input string to avoid mutation
+  const consonants = /(^[bcdfghjklmnpqrstvwxyz]+)?/i; // regex checking whether the string begins with one or more consonants
   let match = nStr.match(consonants);
-  let consCluster = match[0];
-  if (consCluster.length){
+  let consCluster = match[0]; // grab the consonants at the beginning of the word if there are any
+  if (consCluster.length){ // if there is a consonant at the beginning,
     nStr = nStr.slice(consCluster.length)
                 .concat(consCluster)
                 .concat("ay");
