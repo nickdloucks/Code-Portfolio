@@ -16,7 +16,7 @@ class MyForm extends React.Component {
   }
   handleChange(event) {
     this.setState({
-      input: event.target.value
+      input: event.target.value // update the input string as the user types
     });
   }
   handleSubmit(event) {
