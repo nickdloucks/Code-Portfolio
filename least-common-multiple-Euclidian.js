@@ -22,11 +22,10 @@ function smallestCommons(arr) {
       if ((x===0) || (y===0)){ // if either number is 0, the GCF is the larger of the two
           return (x > y) ? x : y;
       }else{ // otherwise the GCF is found with the smaller number and the remainder of the bigger number divided by the smaller number.
-            // once the smaller number is equal to 0, the recursion will stop at the <if> code block above
           return gcf(y, x % y);
-      }
+      }       // once the smaller number is equal to 0, the recursion will stop at the <if> code block above, returning the non-zero number
   }
-  function lcm(x,y){ // calculate the c of two numbers
+  function lcm(x,y){ // calculate the lowest common multiple of two numbers
       return (x * y)/gcf(x,y); // multiply the two given numbers, 
                               // then divide by the greatest common factor of the same given numbers 
                               //to get their least common multiple
