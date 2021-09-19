@@ -8,8 +8,8 @@ class MyForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
-      submit: ''
+      input: '', // input will show the user input string as  it changes
+      submit: '' // submit will hold the current value when the user submits
     };
     this.handleChange = this.handleChange.bind(this); // bind event handlers to the instance of this component
     this.handleSubmit = this.handleSubmit.bind(this);
