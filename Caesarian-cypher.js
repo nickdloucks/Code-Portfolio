@@ -7,6 +7,7 @@ function rot13(str, interval) {// {interval} parameter dynamically changes the o
 
   let message = '';
   let letter = /[A-Z]/i; //regex to determine if a character is a letter
+  
   //MAIN ALGORITHM BELOW:
   for(let i=0; i<nStr.length; i++){
     let codeChar = nStr.charAt(i);//current character from encrypted message
