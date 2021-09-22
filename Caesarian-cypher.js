@@ -1,4 +1,4 @@
-function rot13(str) {// add {interval} as a parameter to this function to dynamically change the offset interval of the cypher: see variable below...
+function rot13(str, interval) {// {interval} parameter dynamically changes the offset interval of the cypher.
   let nStr = str;//copy input to avoid mutation
   const NUM_ALPH = {//object storing all letters indexed by alphabetical position to reduce time complexity
     1:'A', 2: 'B', 3:'C', 4:'D', 5:'E', 6:'F', 7:'G', 8:'H', 9:'I', 10:'J', 11:'K', 12: 'L', 13: 'M', 14: 'N', 15: 'O', 16: 'P', 17: 'Q', 18: 'R', 19: 'S', 20: 'T', 21: 'U', 22: 'V', 23: 'W', 24: 'X', 25: 'Y', 26: 'Z'};
@@ -7,7 +7,6 @@ function rot13(str) {// add {interval} as a parameter to this function to dynami
 
   let message = '';
   let letter = /[A-Z]/i; //regex to determine if a character is a letter
-  let interval = 13; // change offset interval with a numeric parameter to this function
   //MAIN ALGORITHM BELOW:
   for(let i=0; i<nStr.length; i++){
     let codeChar = nStr.charAt(i);//current character from encrypted message
@@ -30,4 +29,4 @@ function rot13(str) {// add {interval} as a parameter to this function to dynami
   return message;
 }
 
-rot13("SERR PBQR PNZC");
+rot13("SERR PBQR PNZC", 13);
