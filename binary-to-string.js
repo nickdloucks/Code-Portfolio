@@ -2,7 +2,7 @@ function binaryAgent(str) {
   let binArr = str.split(" ");//split the string into
 	//an array of bytes, one per character
   const biVals = [128, 64, 32, 16, 8, 4, 2, 1];//these
-  //are all the possible values of a <1> in a byte
+  //are all the possible values of a <1> in a byte at each position
   function byteToUtf(byte){//takes a byte as a string
     let indexes = [];//will hold values of the <1>'s in
     //the provided byte argument
