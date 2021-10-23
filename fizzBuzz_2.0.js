@@ -22,3 +22,13 @@ let nums = Array.from({length:100}, function(_, index){ // initialize array of l
 });
 
 nums.forEach((val) => console.log(val));
+
+/* NOTE: the second parameter to <Array.from()> is a "mapFn" callback which takes 2 parameters:
+ -value
+ -index
+ 
+ see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+ 
+ I'm ignoring the <value> param of this callback function with an "_" because I don't need it, I just use the index. 
+ When the <nums> Array is constructed, it is initialized with a length of 100, but the elements do not yet have a value.
+ I set the value of each element based on the index, or based on whether <num> is divisible by 3 and/or 5. */
