@@ -13,7 +13,7 @@ let nums = Array.from({length:100}, function(_, index){ // initialize array of l
         fbStr = 'fizz'; // if <num> is divisible by 3, return 'fizz'
     }
     if((num % 5) === 0){
-        fbStr.concat('buzz'); // if <num> is divisible by 5, return 'buzz'
+        fbStr = fbStr.concat('buzz'); // if <num> is divisible by 5, return 'buzz'
     }
 
     // if <num> is divisible by 3 AND 5, <fbStr> will be 'fizzbuzz'
