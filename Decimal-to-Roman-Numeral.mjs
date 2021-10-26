@@ -57,4 +57,3 @@ export function romNumConv(numParam){
     return finalRoman;
 }
 
-export default romNumConv;
