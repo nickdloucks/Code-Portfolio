@@ -1,3 +1,9 @@
+/*
+ * This function takes a string of bytes and converts them to characters.
+ * input: string of bytes written in binary
+ * output: string translated to human-readable characters
+ */
+
 function binaryAgent(str) {
   let binArr = str.split(" ");//split the string into
 	//an array of bytes, one per character
