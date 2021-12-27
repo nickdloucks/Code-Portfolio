@@ -1,0 +1,23 @@
+{
+  "name": "code-exercises",
+  "version": "1.0.0",
+  "description": "code-challenges-homework",
+  "main": "karatsuba-multiply.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "launch": 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickdloucks/Code-Exercises.git"
+  },
+  "keywords": [
+    "exercises"
+  ],
+  "author": "Nick Loucks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickdloucks/Code-Exercises/issues"
+  },
+  "homepage": "https://github.com/nickdloucks/Code-Exercises#readme"
+}
