@@ -5,6 +5,9 @@ function karatsuba(x: number, y: number) : number {
     let x_string = x.toString();
     let y_string = x.toString();
 
+    let n = (x_string.length > y_string.length) ? x_string.length : y_string.length;
+    let half_n = n/2; 
+
     let x1: number = Number(x_string[0]);
     let x2: number = Number(x_string.slice(1));
 
