@@ -1,5 +1,5 @@
 function karatsuba(x: number, y: number) : number {
-  if ((x < 10) && (y < 10)) {
+  if ((x < 10) || (y < 10)) {
     return x * y;
   } else {
     let x_string = x.toString();
@@ -13,5 +13,6 @@ function karatsuba(x: number, y: number) : number {
 
     let a = x1 * y1;
     let c = x2 * y2;
+    let b = (x1 + x2) * (y1 + y2) - a - c;
   }
 }
