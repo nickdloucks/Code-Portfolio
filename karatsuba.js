@@ -3,7 +3,7 @@ function karatsuba(x, y)  {
       return x * y;
     } else {
       let x_string = x.toString();
-      let y_string = x.toString();
+      let y_string = y.toString();
   
       let n = (x_string.length > y_string.length) ? x_string.length : y_string.length;
       let half_n = n/2; 
@@ -22,6 +22,8 @@ function karatsuba(x, y)  {
       return product;
     }
   }
-  let result = karatsuba(3141592653589793238462643383279502884197169399375105820974944592, 
-    2718281828459045235360287471352662497757247093699959574966967627);
+  let result = karatsuba(1234, 5678);
   console.log(result);
+
+  /*3141592653589793238462643383279502884197169399375105820974944592, 
+    2718281828459045235360287471352662497757247093699959574966967627 */
