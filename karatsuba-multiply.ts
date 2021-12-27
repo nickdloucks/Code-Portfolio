@@ -14,8 +14,11 @@ function karatsuba(x: number, y: number) : number {
     let y1: number = Number(y_string.slice(0, half_n));
     let y2: number = Number(y_string.slice(half_n));
 
-    let a = x1 * y1;
-    let c = x2 * y2;
-    let b = (x1 + x2) * (y1 + y2) - a - c;
+    let a = karatsuba(x1, y1);
+    let c = karatsuba(x2, y2);
+    let b = karatsuba((x1 + x2), (y1 + y2)) - a - c;
+
+    let product = a * 10**(2*half_n) + (b * 10**half_n) + c;
+    return product;
   }
 }
