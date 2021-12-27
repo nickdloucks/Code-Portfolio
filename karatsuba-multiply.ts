@@ -8,11 +8,11 @@ function karatsuba(x: number, y: number) : number {
     let n = (x_string.length > y_string.length) ? x_string.length : y_string.length;
     let half_n = n/2; 
 
-    let x1: number = Number(x_string[0]);
-    let x2: number = Number(x_string.slice(1));
+    let x1: number = Number(x_string.slice(0, half_n));
+    let x2: number = Number(x_string.slice(half_n));
 
-    let y1: number = Number(y_string[0]);
-    let y2: number = Number(y_string.slice(1));
+    let y1: number = Number(y_string.slice(0, half_n));
+    let y2: number = Number(y_string.slice(half_n));
 
     let a = x1 * y1;
     let c = x2 * y2;
