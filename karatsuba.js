@@ -17,7 +17,8 @@ function karatsuba(x, y)  {
       let a = karatsuba(x1, y1);
       let c = karatsuba(x2, y2);
       let b = karatsuba((x1 + x2), (y1 + y2)) - a - c;
-  
+
+      // BUG MUST BE IN PRODUCT LINE
       let product = a * 10**(2*half_n) + (b * 10**half_n) + c;
       return product;
     }
