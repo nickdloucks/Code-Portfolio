@@ -2,7 +2,7 @@
   "name": "code-exercises",
   "version": "1.0.0",
   "description": "code-challenges-homework",
-  "main": "karatsuba-multiply.ts",
+  "main": "karatsuba.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
