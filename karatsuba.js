@@ -2,7 +2,7 @@ function karatsuba(x, y)  {
     let x_string = x.toString();
     let y_string = y.toString();
 
-    if ((x_string.length <= 2) || (y_string.length <= 2)) {
+    if ((x_string.length <= 4) || (y_string.length <= 4)) { // minimum 4 digits to use Karatsuba, otherwise use brute force
       return x * y;
     } else {
       let n = Math.min(y_string.length, x_string.length); // n = number of digits in the input numbers
@@ -19,11 +19,11 @@ function karatsuba(x, y)  {
       let z2 = karatsuba(x_left, y_left);
 
       // BUG MUST BE IN PRODUCT LINE
-      let product = (z2 * (10**(2*(n/2)))) + ((z1-z2-z0) * (10**(n/2))) + z0; // xy=a∗B(2m)+b∗Bm+z0
+      let product = (z2 * (10**(2*(n/2)))) + ((z1-z2-z0) * (10**(half_n))) + z0; // xy=a∗B(2m)+b∗Bm+z0
       return product;
     }
   }
-  let result = karatsuba(1234, 5678);
+  let result = karatsuba(12345, 67890);
   console.log(result);
 
   /*3141592653589793238462643383279502884197169399375105820974944592, 
