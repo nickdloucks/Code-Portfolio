@@ -8,18 +8,18 @@ function karatsuba(x, y)  {
       let n = (x_string.length > y_string.length) ? y_string.length : x_string.length;
       let half_n = Math.floor(n / 2); 
   
-      let x1 = Number(x_string.slice(0, half_n));
-      let x2 = Number(x_string.slice(half_n));
+      let x_left = Number(x_string.slice(0, half_n));
+      let x_right = Number(x_string.slice(half_n));
   
-      let y1 = Number(y_string.slice(0, half_n));
-      let y2 = Number(y_string.slice(half_n));
+      let y_left = Number(y_string.slice(0, half_n));
+      let y_right = Number(y_string.slice(half_n));
   
-      let a = karatsuba(x1, y1);
-      let c = karatsuba(x2, y2);
-      let b = karatsuba((x1 + x2), (y1 + y2)); // b=(x1+x2)(y1+y2)−a−c
+      let z0 = karatsuba(x_right, y_right);
+      let z1 = karatsuba((x_left + x_right), (y_left + y_right)); // z1=(x_left+x_right)(y_left+y_right)−a−c
+      let z2 = karatsuba(x_left, y_left);
 
       // BUG MUST BE IN PRODUCT LINE
-      let product = (a * (10**(2*half_n))) + ((b-a-c) * (10**half_n)) + c; // xy=a∗B(2m)+b∗Bm+c
+      let product = (z2 * (10**(2*half_n))) + ((z1-z2-z0) * (10**half_n)) + z0; // xy=a∗B(2m)+b∗Bm+z0
       return product;
     }
   }
