@@ -1,17 +1,17 @@
 function karatsuba(x, y)  {
-    if ((x < 10) || (y < 10)) {
+    let x_string = x.toString();
+    let y_string = y.toString();
+
+    if ((x_string.length <= 2) || (y_string.length <= 2)) {
       return x * y;
     } else {
-      let x_string = x.toString();
-      let y_string = y.toString();
-  
-      let n = Math.min(y_string.length, x_string.length);
+      let n = Math.min(y_string.length, x_string.length); // n = number of digits in the input numbers
       let half_n = Math.floor(n / 2); 
   
-      let x_left = Number(x_string.slice(0, half_n));
+      let x_left = Number(x_string.slice(0, half_n)); // split X into two numbers
       let x_right = Number(x_string.slice(half_n));
   
-      let y_left = Number(y_string.slice(0, half_n));
+      let y_left = Number(y_string.slice(0, half_n)); // split Y into two numbers
       let y_right = Number(y_string.slice(half_n));
   
       let z0 = karatsuba(x_right, y_right);
