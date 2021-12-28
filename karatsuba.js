@@ -19,7 +19,7 @@ function karatsuba(x, y)  {
       let b = karatsuba((x1 + x2), (y1 + y2)); // b=(x1+x2)(y1+y2)−a−c
 
       // BUG MUST BE IN PRODUCT LINE
-      let product = (a * (10**(2*half_n))) + (b * (10**(half_n))) + c; // xy=a∗B(2m)+b∗Bm+c
+      let product = (a * (10**(2*half_n))) + ((b-a-c) * (10**half_n)) + c; // xy=a∗B(2m)+b∗Bm+c
       return product;
     }
   }
