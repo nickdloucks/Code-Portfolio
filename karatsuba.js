@@ -5,7 +5,7 @@ function karatsuba(x, y)  {
       let x_string = x.toString();
       let y_string = y.toString();
   
-      let n = (x_string.length > y_string.length) ? x_string.length -1 : y_string.length -1;
+      let n = (x_string.length > y_string.length) ? y_string.length : x_string.length;
       let half_n = Math.floor(n / 2); 
   
       let x1 = Number(x_string.slice(0, half_n));
@@ -16,14 +16,14 @@ function karatsuba(x, y)  {
   
       let a = karatsuba(x1, y1);
       let c = karatsuba(x2, y2);
-      let b = karatsuba((x1 + x2), (y1 + y2)) - a - c; // b=(x1+x2)(y1+y2)−a−c
+      let b = karatsuba((x1 + x2), (y1 + y2)); // b=(x1+x2)(y1+y2)−a−c
 
       // BUG MUST BE IN PRODUCT LINE
       let product = (a * (10**(2*half_n))) + (b * (10**(half_n))) + c; // xy=a∗B(2m)+b∗Bm+c
       return product;
     }
   }
-  let result = karatsuba(1234, 5678);
+  let result = karatsuba(123, 567);
   console.log(result);
 
   /*3141592653589793238462643383279502884197169399375105820974944592, 
