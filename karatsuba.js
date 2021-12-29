@@ -14,12 +14,12 @@ function karatsuba(x, y)  {
       let y_left = Math.floor(x / (10**m));
       let y_right = x % (10**m);
   
-      let z0 = karatsuba(x_right, y_right);
-      let z1 = karatsuba((x_left + x_right), (y_left + y_right)); // z1=(x_left+x_right)(y_left+y_right)−a−c
-      let z2 = karatsuba(x_left, y_left);
+      let c = karatsuba(x_right, y_right);
+      let b = karatsuba((x_left + x_right), (y_left + y_right)); // b=(x_left+x_right)(y_left+y_right)−a−c
+      let a = karatsuba(x_left, y_left);
 
       // BUG MUST BE IN PRODUCT LINE
-      let product = (z2 * (10**(2*m))) + ((z1-z2-z0) * (10**(m))) + z0; // xy=a∗B(2m)+b∗Bm+z0
+      let product = (a * (10**(2*m))) + ((b-a-c) * (10**(m))) + c; // xy=a∗B(2m)+b∗Bm+c
       return product;
     }
   }
