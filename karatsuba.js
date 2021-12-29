@@ -11,8 +11,8 @@ function karatsuba(x, y)  {
       let x_left = Math.floor(x / (10**m));
       let x_right = x % (10**m);
 
-      let y_left = Math.floor(x / (10**m));
-      let y_right = x % (10**m);
+      let y_left = Math.floor(y / (10**m));
+      let y_right = y % (10**m);
   
       let c = karatsuba(x_right, y_right);
       let b = karatsuba((x_left + x_right), (y_left + y_right)); // b=(x_left+x_right)(y_left+y_right)−a−c
