@@ -1,4 +1,4 @@
-function karatsuba(x, y)  {
+function karatsuba(x, y)  { // PLEASE SEE PYTHON VERSION OF THIS PROJECT! IT IS MORE ACCURATE FOR LARGER INPUTS
     let x_string = x.toString();
     let y_string = y.toString();
 
