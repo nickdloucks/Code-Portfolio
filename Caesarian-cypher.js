@@ -1,3 +1,5 @@
+// NEEDS MORE ROBUST TESTING; MAKE THE ALGORITHM MORE FLEXIBLE FOR DYNAMIC "INTERVALS" OF ENCRYPTION
+
 function rot13(str, interval) { // <interval> parameter dynamically changes the offset interval of the cypher.
   let nStr = str; //copy input to avoid mutation
   const NUM_ALPH = { //object storing all letters indexed by alphabetical position to reduce time complexity
