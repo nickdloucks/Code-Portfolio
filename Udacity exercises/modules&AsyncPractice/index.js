@@ -9,18 +9,18 @@
  */
 
 
-const {concat, cut3} = require('./utilities/arrayMutate.js');
+const mutate = require('./utilities/arrayMutate.js');
 const {sum, lgNum} = require('./utilities/arrayAnalyze.js');
 
 let arrA = [1, 2, 3, 4, 5, 6, 7];
 let arrB = [8, 9, 10];
 
-let arrC = concat(arrA, arrB);
+let arrC = mutate.concat(arrA, arrB);
 let strArrC = arrC.toString();
 console.log(strArrC + ' = concatenated array');
 
 async function analyzeNo3 (arr, func){
-    await cut3(arr);
+    await mutate.cut3(arr);
     return func(arr);
 }
 analyzeNo3(arrA, sum).then(console.log);
