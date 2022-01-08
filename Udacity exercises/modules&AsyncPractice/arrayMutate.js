@@ -1,3 +1,7 @@
+/**
+ * this module written by Udacity for a modules practice exercise
+ */
+
 // Remove the 3rd item from an array
 const cut3 = (arr) => {
     arr.splice(2, 1);
