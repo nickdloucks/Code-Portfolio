@@ -9,23 +9,23 @@
  */
 
 
-const mutate = require('./utilities/arrayMutate.js');
-const {sum, lgNum} = require('./utilities/arrayAnalyze.js');
+const mutate = require('./utilities/arrayMutate.js'); // import whole module as an object w/ methods
+const {sum, lgNum} = require('./utilities/arrayAnalyze.js'); // destructuring
 
-let arrA = [1, 2, 3, 4, 5, 6, 7];
+let arrA = [1, 2, 3, 4, 5, 6, 7]; // dummy data for processing
 let arrB = [8, 9, 10];
 
-let arrC = mutate.concat(arrA, arrB);
-let strArrC = arrC.toString();
+let arrC = mutate.concat(arrA, arrB); // create new array combining the data above
+let strArrC = arrC.toString(); // save a string version for better visibility when printing
 console.log(strArrC + ' = concatenated array');
 
-async function analyzeNo3 (arr, func){
+async function analyzeNo3 (arr, func){ // practice async code: use input data and a function to dynamically process
     await mutate.cut3(arr);
     return func(arr);
 }
-analyzeNo3(arrA, sum).then(console.log);
+analyzeNo3(arrA, sum).then(console.log); // once data is fully processed, display in console
 console.log('was "await" first?');
 
-process.on('beforeExit', () => {
+process.on('beforeExit', () => { // use another function from the library at the end
     console.log(lgNum(arrB));
 });
