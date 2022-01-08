@@ -16,13 +16,15 @@ let arrA = [1, 2, 3, 4, 5, 6, 7];
 let arrB = [8, 9, 10];
 
 let arrC = concat(arrA, arrB);
-process.stdout.write(arrC, '\n');
+let strArrC = arrC.toString();
+console.log(strArrC + ' = concatenated array');
 
 async function analyzeNo3 (arr, func){
     await cut3(arr);
     return func(arr);
 }
 analyzeNo3(arrA, sum).then(console.log);
+console.log('was "await" first?');
 
 process.on('beforeExit', () => {
     console.log(lgNum(arrB));
