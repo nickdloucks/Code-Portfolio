@@ -22,4 +22,4 @@ const lgNum = (arr) => {
     return total;
   };
   
-  exports: {lgNum, sum};
+module.exports = {lgNum, sum};

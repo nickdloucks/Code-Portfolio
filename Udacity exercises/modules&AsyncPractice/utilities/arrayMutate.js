@@ -13,4 +13,4 @@ const cut3 = (arr) => {
     return [...arr1, ...arr2];
   };
   
-  exports: {cut3, concat};
+module.exports = {cut3, concat};
