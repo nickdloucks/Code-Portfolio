@@ -4,8 +4,7 @@
   "description": "code-challenges-homework",
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier --config .prettierrc 'src/**/*.js' --write",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettier": "prettier --config .prettierrc src/**/*.{js,ts} --write"
   },
   "repository": {
     "type": "git",
