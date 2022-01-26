@@ -56,6 +56,6 @@ Timer.defaultProps = {
 Timer.propTypes = {
   timeElapsed: PropTypes.number.isRequired,
   dateStamp: PropTypes.string.isRequired,
-};
+}; // Type validation for input
 
 export default Timer;
