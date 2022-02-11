@@ -1,4 +1,4 @@
-import isPalindrome from '../src/Palindrome-checker';
+import isPalindrome from '../Palindrome-checker';
 
 describe("The Palindrome checker", () => {
   it("is no null", ()=>{
