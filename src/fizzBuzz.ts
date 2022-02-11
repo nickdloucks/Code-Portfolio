@@ -11,10 +11,10 @@ for (let i = 0; i < 100; i++) {
   if (count % 3 === 0 && count % 5 === 0) {
     console.log('FizzBuzz');
   } // number is divisible by both 3 and 5, print "fizzbuzz"
-  else if ((count % 3 === 0) && (count % 5 !== 0)) {
+  else if (count % 3 === 0 && count % 5 !== 0) {
     console.log('Fizz');
   } // number is divisible by 3, print "fizz"
-  else if ((count % 5 === 0) && (count % 3 !== 0)) {
+  else if (count % 5 === 0 && count % 3 !== 0) {
     console.log('Buzz');
   } // number is divisible by 5, print "buzz"
   else {

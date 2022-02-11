@@ -4,15 +4,14 @@ import PropTypes from 'prop-types';
 /**
  * A component to display of the current instance of a running timer, or a static time.
  * It displays in the form { 00:00:00 } (hours, minutes, seconds).
- * @param {number} timeElapsed : number of secods passed since timer was activated 
+ * @param {number} timeElapsed : number of secods passed since timer was activated
  * @param {string} dateStamp : date when timer activated; acts as a key
- * @returns : a timer string or template literal 
+ * @returns : a timer string or template literal
  */
 
 const Timer = function ({ timeElapsed, dateStamp }) {
-
   // The following subroutine parses <timeElapsed> into a digital clock display format:
-  // Only parse the timer if one second or more has elapsed; 
+  // Only parse the timer if one second or more has elapsed;
   // otherwise display all zeroes.
 
   if (timeElapsed > 0) {
@@ -24,7 +23,7 @@ const Timer = function ({ timeElapsed, dateStamp }) {
     let hrs = (totSec - (totSec % 3600)) / 3600; // hours
 
     console.log(`totSec=${totSec}:_ hrs=${hrs}, min=${mins}, sec=${sec}`);
-    // ^ template literal to display in console: 
+    // ^ template literal to display in console:
     // displays the same output as the JSX in the first subroutine below
 
     return (
