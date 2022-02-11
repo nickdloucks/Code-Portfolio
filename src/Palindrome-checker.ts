@@ -5,7 +5,7 @@
  * returns boolean: true if input is a palindrome, false if it's not.
  */
 
-function palindrome(str) {
+export default function palindrome(str: string) {
   let testStr = str.toLowerCase(); // copy input to avoid mutation, and convert to lowercase to make comparison easier
   let noPunc = /[^a-z0-9]/gi; //regex for non-word characters like punctuation or spaces
   let badChars = noPunc.test(testStr); // test the input for characters to ignore, like punctuation.
