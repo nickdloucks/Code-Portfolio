@@ -1,11 +1,15 @@
 /**
+  * STILL DEBUGGING*
   * controlled input React component
   * input: string in input box
   * output: display input string in an <h2> element
   */
 
+import React, { ReactComponentElement } from "react";
+import { ChangeEvent, DOMElement, JSXElementConstructor } from "react";
+
 class MyForm extends React.Component {
-  constructor(props) {
+  constructor(props: object) {
     super(props);
     this.state = {
       input: '', // input will show the user input string as  it changes
@@ -14,12 +18,12 @@ class MyForm extends React.Component {
     this.handleChange = this.handleChange.bind(this); // bind event handlers to the instance of this component
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(event) {
+  handleChange(event: ChangeEvent): void {
     this.setState({
       input: event.target.value // update the input string as the user types
     });
   }
-  handleSubmit(event) {
+  handleSubmit(event: SubmitEvent): void {
 
     event.preventDefault(); // keep form sumbission from re-loading page
     this.setState({
@@ -27,7 +31,7 @@ class MyForm extends React.Component {
     });
 
   }
-  render() { {/* JSX below */}
+  render(): ReactComponentElement { {/* JSX below */}
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
