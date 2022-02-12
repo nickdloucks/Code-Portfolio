@@ -1,11 +1,11 @@
 /**
- * check whether a string is the same backwards as forwards
+ * Check whether a string is the same backwards as forwards.
  * NOTE: ignores punctuation characters, and letter case.
- * input: a string
- * returns boolean: true if input is a palindrome, false if it's not.
+ * @param str: string. The string to be tested
+ * @returns boolean: true if input is a palindrome, false if it's not.
  */
 
-export default function palindrome(str: string) {
+export default function palindrome(str: string): boolean {
   let testStr = str.toLowerCase(); // copy input to avoid mutation, and convert to lowercase to make comparison easier
   let noPunc = /[^a-z0-9]/gi; //regex for non-word characters like punctuation or spaces
   let badChars = noPunc.test(testStr); // test the input for characters to ignore, like punctuation.
@@ -15,7 +15,7 @@ export default function palindrome(str: string) {
     console.log(testStr + ' _punctuation removed');
   }
 
-  let backwards = testStr.slice(); // copy <testStr> for comparison
+  let backwards: string = testStr.slice(); // copy <testStr> for comparison
   backwards = backwards.split('').reverse().join(''); // reverse the new copy
   // (the method chaining above converts the string to an array of chars, reverses the new array, and concatenates it back to string format)
   if (backwards == testStr) {
