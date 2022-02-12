@@ -1,15 +1,15 @@
-/*
- * This function takes a string of bytes and converts them to characters.
- * input: string of bytes written in binary
- * output: string translated to human-readable characters
+/**
+ * Takes a string of bytes and converts them to UTF characters.
+ * @param binStr: string. A string of bytes written in binary.
+ * @returns: A string translated to human-readable characters
  */
 
-function binaryAgent(str) {
-  let binArr = str.split(' '); //split the string into
-  //an array of bytes, one per character
+function binaryAgent(binStr: string): string {
+  let binArr = binStr.split(' '); //split the string into
+  //an array of bytes, one byte per character
   const biVals = [128, 64, 32, 16, 8, 4, 2, 1]; //these
   //are all the possible values of a <1> in a byte at each position
-  function byteToUtf(byte) {
+  function byteToUtf(byte: string): number {
     //takes a byte as a string
     let indexes = []; //will hold values of the <1>'s in
     //the provided byte argument
