@@ -1,10 +1,10 @@
 /**
  * This function calculates the sum of all odd fibonacci numbers up to a given maximum.
- * input: integer
- * output: sum of odd fibonacci sequence numbers below the input
+ * @param num: number. The maximum up to which all odd fibbonacci number will be summed.
+ * @returns sum: number. The sum of odd fibonacci sequence numbers below the input
  */
 
-function sumFibs(num) {
+function sumFibs(num: number): number {
   // in Fibonacci sequence, the next number is calculated by adding together the two previous numbers.
   let fibs = [1, 1]; // store first pair of Fibonacci numbers, starting with [1, 1].
   // (number <0> is omitted to reduce number of operations)
