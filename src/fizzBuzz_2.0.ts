@@ -7,8 +7,8 @@
 
 let nums = Array.from({ length: 100 }, function (_, index) {
   // initialize array of length 100, callback populates values
-  let num = index + 1; // start Array at 1 instead of 0
-  let fbStr = '';
+  let num: number = index + 1; // start Array at 1 instead of 0
+  let fbStr: string = '';
 
   if (num % 3 === 0) {
     fbStr = 'fizz'; // if <num> is divisible by 3, return 'fizz'
