@@ -1,15 +1,17 @@
 /**
- * translate a given string to Pig-Latin
- * input: string (word)
- * output: string in Pig-Latin
- * note: to translate a whole sentence of words, pass this function as a callback after separating the sentance into an array of words
+ * Translates a given word into Pig-Latin.
+ * NOTE: To translate a whole sentence of words, 
+ * pass this function as a callback after separating the sentence into an array of words.
+ * @param str: string. Word to be translated.
+ * @returns The string in Pig-Latin.
  */
 
-function translatePigLatin(str) {
+function translatePigLatin(str: string): string {
   let nStr = str; // save copy of input string to avoid mutation
   const consonants = /(^[bcdfghjklmnpqrstvwxyz]+)?/i; // regex checking whether the string begins with one or more consonants
-  let match = nStr.match(consonants);
-  let consCluster = match[0]; // grab the consonants at the beginning of the word if there are any
+  let match: RegExpMatchArray | null = nStr.match(consonants);
+  let consCluster: string = (match) ? match[0]: ''; // grab the consonants at the beginning of the word if there are any
+    // if there are no consonants at beginning, consCluster will be an empty string
   if (consCluster.length) {
     // if there is a consonant at the beginning,
     nStr = nStr
@@ -20,7 +22,6 @@ function translatePigLatin(str) {
     // reaching this block means the word begins with a vowel
     nStr = nStr.concat('way'); // don't cut anything off the beginning, just add "way" to the end
   }
-  console.log(nStr);
   return nStr;
 }
 
