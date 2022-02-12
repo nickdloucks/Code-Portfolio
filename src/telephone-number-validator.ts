@@ -1,10 +1,10 @@
 /**
- * validates whether an input string is a valid US phone number
- * input: string
- * output: boolean
+ * Validates whether an input string is a valid US phone number.
+ * @param phone: string. The phone number should be in string format.
+ * @returns: boolean
  */
 
-function telephoneCheck(phone) {
+function telephoneCheck(phone: string): boolean {
   let last7nums = /(\d{3}[- .]?\d{4})$/; // regex validating the last 7 digits
   /** a US phone number will end with:
    * - a sequence of 3 digits, possibly book-ended by a spacing character (such as a dash, dot, or space)
