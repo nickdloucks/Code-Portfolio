@@ -1,7 +1,8 @@
 /**
- * convert decimal number to a Roman Numeral string;
- * one parameter: an integer in arabic/decimal format
- * returns a Roman Numeral of the same number
+ * Converts a base-10 number to a Roman Numeral string;
+ * @param ase10num: number | string. An integer in base-10 format
+ * @returns romDigStr: string. A Roman Numeral version of the same number.
+ * 
  * process:
  * 1. convert decimal to string, split into an array of chars, then reverse the array.
  * 2. loop thru the reversed array of chars; inside the loop, store the digit as a number for comparison.
@@ -9,18 +10,18 @@
  * 4. push the letter sequence onto the final roman numeral string and return the finished string.
  */
  
-export function romNumConv(numParam){
+export function romNumConv(base10num: number | string): string{
     let romans = ['I', 'V', 'X', 'L', 'C', 'D', 'M', 'V\u0305', 'X\u0305', 'L\u0305', 'C\u0305', 'D\u0305', 'M\u0305']; // list of Roman numeral letters
         // the '\u0305' code adds a line over the character. In Roman numerals, this indicates the letter has its normal value but multiplied by 1,000 
-    let decimalNum = numParam.toString().split('').reverse(); //decimal number is converted to a string, then to an array, then reversed for easier processing
+    let decimalNum = base10num.toString().split('').reverse(); //decimal number is converted to a string, then to an array, then reversed for easier processing
 
-    function getLetters(magnitude){ //magnitude will be an index representing whether a digit is in the 1s, 10s, 100s, or 1000s place etc.
+    function getLetters(magnitude: number): string[] { //magnitude will be an index representing whether a digit is in the 1s, 10s, 100s, or 1000s place etc.
         let letters = romans.slice(magnitude*2, (magnitude*2) + 3);
         // a digit in the 1s place uses Roman letters I, V, & X; the 10s place uses Roman letters X, L, & C; etc.
         return letters;
     }
 
-    function digitBuilder(decimal, index){
+    function digitBuilder(decimal: string, index: number): string{
         let useLetters = getLetters(index); //grab the Roman letters necessary for this particular digit of the decimal-format number
 
         let smallLetter = useLetters[0]; // the #1 letter for any digit. example: I
