@@ -1,8 +1,14 @@
 // NEEDS MORE ROBUST TESTING; MAKE THE ALGORITHM MORE FLEXIBLE FOR DYNAMIC "INTERVALS" OF ENCRYPTION
+/**
+ * Translates a message encoded in a Caesarian-cypher, given the offset interval.
+ * @param code: string. The encoded/encrypted message to be translated.
+ * @param interval: number. The specified offset interval used to decode the message.
+ * @returns : string. The de-coded/unencrypted message.
+ */
 
-function rot13(str, interval) {
+function rot13(code: string, interval: number): string {
   // <interval> parameter dynamically changes the offset interval of the cypher.
-  let nStr = str; //copy input to avoid mutation
+  let codeMsg = code; //copy input to avoid mutation
   const NUM_ALPH = {
     //object storing all letters indexed by alphabetical position to reduce time complexity
     1: 'A',
@@ -66,8 +72,8 @@ function rot13(str, interval) {
   let letter = /[A-Z]/i; //regex to determine if a character is a letter
 
   //MAIN ALGORITHM BELOW:
-  for (let i = 0; i < nStr.length; i++) {
-    let codeChar = nStr.charAt(i); //current character from encrypted message
+  for (let i = 0; i < codeMsg.length; i++) {
+    let codeChar = codeMsg.charAt(i); //current character from encrypted message
     if (letter.test(codeChar)) {
       //test if current code character is a letter
       const codePos = ALPH_NUM[codeChar]; //position of codeChar in the alphabet
