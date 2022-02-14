@@ -1,9 +1,9 @@
 /**
  * Converts a base-10 number to a Roman Numeral string;
- * @param ase10num: number | string. An integer in base-10 format
+ * @param base10num: number | string. An integer in base-10 format
  * @returns romDigStr: string. A Roman Numeral version of the same number.
  * 
- * process:
+ * Process:
  * 1. convert decimal to string, split into an array of chars, then reverse the array.
  * 2. loop thru the reversed array of chars; inside the loop, store the digit as a number for comparison.
  * 3. assign the correct sequence of small, medium, and big letters based on the digit's place in the decimal-format number provided.
