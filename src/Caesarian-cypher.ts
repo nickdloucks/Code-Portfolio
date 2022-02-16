@@ -71,12 +71,16 @@ function rot13(code: string, interval: number): string {
   let message = '';
   let letter = /[A-Z]/i; //regex to determine if a character is a letter
 
+  function getPosition<T, K extends keyof T>(object: T, position: K): T[K]{
+    return object[position];
+  }
+
   //MAIN ALGORITHM BELOW:
   for (let i = 0; i < codeMsg.length; i++) {
     let codeChar: string = codeMsg.charAt(i); //current character from encrypted message
     if (letter.test(codeChar)) { //test if current code character is a letter
-      const codePos: number = ALPH_NUM[codeChar]; //position of codeChar in the alphabet
-      let nLetter = (codePos <= 13) ? NUM_ALPH[codePos + interval] : NUM_ALPH[codePos - interval];
+      const codePos: number = getPosition(ALPH_NUM, codeChar); //position of codeChar in the alphabet
+      let nLetter: string = (codePos <= 13) ? NUM_ALPH[codePos + interval] : NUM_ALPH[codePos - interval];
       //if codeChar is in first half of alphabet, add "interval" to the codeChar's position in the alphabet to get the new letter for the de-coded message
       //if codechar is in the secode half of alphabet, subtract interval
       message = message.concat(nLetter);
