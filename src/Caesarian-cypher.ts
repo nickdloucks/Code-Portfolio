@@ -6,12 +6,22 @@
  * @returns : string. The de-coded/unencrypted message.
  */
 
-function rot13(code: string, interval: number): string {
+function decypher(code: string, interval: number): string {
   // <interval> parameter dynamically changes the offset interval of the cypher.
   let codeMsg = code; //copy input to avoid mutation
 
-  const ALPH_NUM = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
-    'N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+  const ALPH_NUM = [ // letters in normal order
+    'A','B','C','D','E','F','G','H','I','J','K','L','M',
+    'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  
+  let mutateLetters = ALPH_NUM.slice(); // copy the alphabet; this copy will be mutated
+  let cypherKey = mutateLetters.splice(interval, 26 - interval); 
+    // using the offset interval, start building out the key to decypher the message
+  cypherKey = cypherKey.concat(...mutateLetters);
+    // add remaining letters to the end of the cypher key
+
+
+  // JVII GSHI GEQT
 
   let message = '';
   let letter = /[A-Z]/i; //regex to determine if a character is a letter
@@ -37,4 +47,5 @@ function rot13(code: string, interval: number): string {
   return message;
 }
 
-rot13('SERR PBQR PNZC', 13);
+decypher('SERR PBQR PNZC', 13);
+decypher('JVII GSHI GEQT', 4);
