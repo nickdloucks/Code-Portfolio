@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\src\\Caesarian-cypher.ts"
+            "program": "${workspaceFolder}\\build\\Caesarian-cypher.js"
         }
     ]
 }
