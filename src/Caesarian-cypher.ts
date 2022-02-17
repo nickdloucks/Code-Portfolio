@@ -32,7 +32,7 @@ function decypher(code: string, interval: number): string {
     let codeChar: string = codeMsg.charAt(i); //current character from encrypted message
     if (letter.test(codeChar)) { //test if current code character is a letter
       const codePos: number = ALPH_NUM.indexOf(codeChar); //position of codeChar in the alphabet
-      let nLetter: string = (codePos <= 13) ? ALPH_NUM[codePos + interval] : ALPH_NUM[codePos - interval];
+      let nLetter: string = cypherKey[codePos];
       //if codeChar is in first half of alphabet, add "interval" to the codeChar's position in the alphabet to get the new letter for the de-coded message
       //if codechar is in the secode half of alphabet, subtract interval
       message = message.concat(nLetter);
