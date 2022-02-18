@@ -11,7 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\build\\Caesarian-cypher.js"
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "program": "${workspaceFolder}\\src\\Caesarian-cypher.ts"
         }
     ]
 }
