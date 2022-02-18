@@ -8,7 +8,7 @@ function sumFibs(num: number): number {
   // in Fibonacci sequence, the next number is calculated by adding together the two previous numbers.
   let fibs = [1, 1]; // store first pair of Fibonacci numbers, starting with [1, 1].
   // (number <0> is omitted to reduce number of operations)
-  const nextFib = function () {
+  function nextFib(): number {
     // calculate the next number in the sequence
     return fibs[0] + fibs[1];
   };
