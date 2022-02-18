@@ -11,7 +11,7 @@
  *      given as change. NOTE: The change given will only include units where the total value for the unit
  *      given to the customer is > 0. For example, ["$TYPE", 0.0] will not appear in the return value.
  */
-function checkCashRegister(price, cash, cid) {
+function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>) {
   if (price % 0.001 > 0 || cash % 0.001 > 0) {
     // Edge case: input of money values < 1 cent
     return {
@@ -22,7 +22,7 @@ function checkCashRegister(price, cash, cid) {
   }
 
   let $stillDue = cash - price; // Init. variable: amount of money the customer is still owed
-  let changePile = []; // itemized breakdown of change to be given to the customer
+  let changePile: Array<Array<string | number>> = []; // itemized breakdown of change to be given to the customer
   // ========= STANDARD DATA NEEDED ====
   const MONEY = [
     // money value data stored in array so the recursive function can process it in order of value
@@ -38,10 +38,10 @@ function checkCashRegister(price, cash, cid) {
   ]; // The MONEY array represents the value of one of a given bill or coin
 
   //// Till COUNTING SUBROUTINE:
-  function tillCount(arr2D) {
-    let counter = 0;
+  function tillCount(arr2D: Array<Array<string | number>>) {
+    let counter: number = 0;
     for (let i = 0; i < arr2D.length; i++) {
-      counter += arr2D[i][1];
+      counter += arr2D[i][1] as number;
     }
     counter = Math.round(100 * counter) / 100; // this extra step helps maintain accuracy of floats in Javascript
     return counter;
@@ -58,14 +58,14 @@ function checkCashRegister(price, cash, cid) {
   } else {
     // when totalTill > $stillDue
     ////////////////////////////////////////////////////////////////////////////////////
-    function recurseCount(owed_$, index_$) {
+    function recurseCount(owed_$: number, index_$: number): void {
       if (owed_$ == 0 || index_$ < 0) {
         return;
       } // Stop recursion if no more money is owed,
       // or there are no more types/units of money that could be given out for the remainder
 
-      let slotVal = cid[index_$][1]; // alias for total value of the money in the current bill/coin slot
-      let unitVal = MONEY[index_$][1]; // alias for unit value of current bill/coin
+      let slotVal: number = cid[index_$][1] as number; // alias for total value of the money in the current bill/coin slot
+      let unitVal: number = MONEY[index_$][1] as number; // alias for unit value of current bill/coin
 
       if (!slotVal || owed_$ < unitVal) {
         // no $ in current slot, or the current denomination/unit size is too big to give out
@@ -79,7 +79,7 @@ function checkCashRegister(price, cash, cid) {
         // 1 EXACT UNIT-POP SUBROUTINE
         // the ammount stillowed$ is equal to the unit value of the current bill/coin
         changePile.unshift([type_$, owed_$]); // add the $ name and value to the change pile to be given to customer
-        cid[index_$][1] -= owed_$; // remove from till
+        (cid[index_$][1] as number) -= owed_$; // remove from till
         return;
       } else if (owed_$ > unitVal) {
         // ITERATIVE UNIT-POP SUBROUTINE:
@@ -99,7 +99,7 @@ function checkCashRegister(price, cash, cid) {
         let giveFromSlot = unitCount * unitVal;
 
         changePile.unshift([type_$, giveFromSlot]); // add the change to the pile to be given to the customer
-        cid[index_$][1] -= giveFromSlot; // remove from till
+        (cid[index_$][1] as number) -= giveFromSlot; // remove from till
         remainder += maxFromSlot - giveFromSlot; // if there wasn't enough in the slot to give out the maximum possible,
         // then add the difference to the remainder and recurse on the remainder
 
