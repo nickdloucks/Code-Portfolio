@@ -13,9 +13,9 @@
  */
 
 interface TillStatus {
-  status: string,
-  change: Array<Array<string | number>> | null,
-  message?: string
+  status: string, // till status: open, closed, or error
+  change: Array<Array<string | number>> | null, // 2-dimensional array with string and number types. Or null
+  message?: string // optional error message if input is not given in valid USD increments
 }
 
 function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
