@@ -11,7 +11,14 @@
  *      given as change. NOTE: The change given will only include units where the total value for the unit
  *      given to the customer is > 0. For example, ["$TYPE", 0.0] will not appear in the return value.
  */
-function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>) {
+
+interface TillStatus {
+  status: string,
+  change: Array<Array<string | number>> | null,
+  message?: string
+}
+
+function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
   if (price % 0.001 > 0 || cash % 0.001 > 0) {
     // Edge case: input of money values < 1 cent
     return {
