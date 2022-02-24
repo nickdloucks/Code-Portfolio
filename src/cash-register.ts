@@ -18,7 +18,7 @@ interface TillStatus {
   message?: string // optional error message if input is not given in valid USD increments
 }
 
-export default function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
+function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
   if (price % 0.001 > 0 || cash % 0.001 > 0) {
     // Edge case: input of money values < 1 cent
     return {
