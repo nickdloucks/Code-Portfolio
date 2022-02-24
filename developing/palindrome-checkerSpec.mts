@@ -1,4 +1,4 @@
-import { default as isPalindrome } from '../Palindrome-checker.js';
+import { default as isPalindrome } from '../src/Palindrome-checker.js';
 
 describe("The Palindrome checker", () => {
   it("correctly checks 'racecar' input", ()=>{
