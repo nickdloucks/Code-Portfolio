@@ -19,14 +19,8 @@ interface TillStatus {
 }
 
 export default function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
-  // if (price % 0.001 > 0 || cash % 0.001 > 0) {
-  //   // Edge case: input of money values < 1 cent
-  //   return {
-  //     status: 'ERROR',
-  //     change: null,
-  //     message: 'Please  round to the nearest cent and try again.',
-  //   };
-  // } // THE HANDLING OF THIS EDGE CASE WAS NOT WORKING, RETURNED ERROR WITH 50 CENTS DUE...
+  price = precise(price); // Unsure money params are w/ in desired precision
+  cash = precise(cash); // See hoisted function <precise()> below the <MONEY> constant
 
   let $stillDue = cash - price; // Init. variable: amount of money the customer is still owed
   let changePile: Array<Array<string | number>> = []; // itemized breakdown of change to be given to the customer
@@ -42,10 +36,11 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
     ['TEN', 10.0],
     ['TWENTY', 20.0],
     ['ONE HUNDRED', 100.0],
-  ]; // The MONEY array represents the value of one of a given bill or coin
+  ]; // The MONEY array represents the value of one instance of a given bill or coin
 
   function precise(decimal: number): number {
-    return Math.round(100 * decimal) / 100;
+    return Math.round(100 * decimal) / 100; // All money values should be given to the nearest hundredth
+    // This function helps since Javascript is not as prcise with decimal numbers as other lanaguages like Python.
   }
 
   //// Till COUNTING SUBROUTINE:
@@ -54,29 +49,26 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
     for (let i = 0; i < arr2D.length; i++) {
       counter += arr2D[i][1] as number;
     }
-    counter = precise(counter); // this extra step helps maintain accuracy of floats in Javascript
+    counter = precise(counter);
     return counter;
   }
   let totalTill = tillCount(cid); // represents the total money value in the till
 
-  console.log($stillDue + ' = still due BEFORE recursion');
 
   //==== MAIN BODY OF ALGORITHM ============
   if (totalTill < $stillDue) { // Not enough money left in the till to make change for this cash amount.
     return { status: 'INSUFFICIENT_FUNDS', change: [] };
   } else if (totalTill === $stillDue) {
     // customer is owed the exact ammount of change in the till
-    // give customer the change and close out the till
+    // give customer all the change and close out the till
     return { status: 'CLOSED', change: cid };
-  } else {
-    // when totalTill > $stillDue
+  } else { // when totalTill > $stillDue
     ////////////////////////////////////////////////////////////////////////////////////
     function recurseCount(owed_$: number = $stillDue, index_$: number): void {
-      if (owed_$ === 0 || index_$ < 0) {
-        return;
-      } // Stop recursion if no more money is owed,
-      // or there are no more types/units of money that could be given out for the remainder
-
+      if (owed_$ === 0 || index_$ < 0) {  // Stop recursion if no more money is owed,
+        return; // or there are no more types/units of money that could be given out for the remainder.
+      }
+      
       let slotVal: number = cid[index_$][1] as number; // alias for total value of the money in the current bill/coin slot
       let unitVal: number = MONEY[index_$][1] as number; // alias for unit value of current bill/coin
 
@@ -86,11 +78,10 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
         return;
       }
 
-      let type_$ = MONEY[index_$][0]; // alias for name of current bill/coin
+      let type_$ = MONEY[index_$][0]; // alias for name of current bill/coin (not needed if current slot is being skipped using subroutine directly above)
 
-      if (owed_$ == unitVal) {
-        // 1 EXACT UNIT-POP SUBROUTINE
-        // the ammount stillowed$ is equal to the unit value of the current bill/coin
+      // 1 EXACT UNIT-POP SUBROUTINE:
+      if (owed_$ == unitVal) { // the ammount stillowed$ is equal to the unit value of the current bill/coin
         changePile.push([type_$, owed_$]); // add the $ name and value to the change pile to be given to customer
         (cid[index_$][1] as number) -= owed_$; // remove from till
         return;
@@ -102,45 +93,37 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
 
         let unitCount = 0;
         while ((unitCount < slotVal / unitVal) && (unitCount < maxFromSlot / unitVal)) {
-          // *****count how many instances of the current bill you can give out
-          unitCount += 1;
+          unitCount += 1; // Count how many instances of the current bill you can give out
         }
 
         let giveFromSlot = unitCount * unitVal;
 
         changePile.push([type_$, giveFromSlot]); // add the change to the pile to be given to the customer
-        (cid[index_$][1] as number) -= giveFromSlot; // remove from till
+        (cid[index_$][1] as number) -= giveFromSlot; // remove $ from till
         remainder += maxFromSlot - giveFromSlot; // if there wasn't enough in the slot to give out the maximum possible,
         // then add the difference to the remainder and recurse on the remainder
 
-        $stillDue = remainder; // BUG SQUASHED! recursing on the remainder w/o first mutating $stillDue decoupled the process from 
-        //what was actually still owed to the customer, thus the program would never think it had given out enough change.
+        $stillDue = remainder; // BUG SQUASHED! recursing on the remainder w/o first mutating $stillDue inadvertently decoupled the process from 
+        // what was actually still owed to the customer, thus the program would never think it had given out enough change.
         // setting $stillDue equal to <remainder> fixes that.
         $stillDue = precise($stillDue); // keep the decimal numbers precise
 
         recurseCount($stillDue, index_$ - 1);
         return;
       }
-      console.log(...changePile);
-      console.log('^ End of Recursion');
       return;
     }
     recurseCount($stillDue, 8);
     ///////////////////////////////////////
   }
-  ///////// BUG LIKELY BELOW: RETURNING INSUFFICEINT FUNDS WHEN THERE'S MORE THAN ENOUGH IN THE TILL....
-  // possible problem with $stillDue being an alias passed into recursive function? it needs to actually mutate the variable
-  // but with recursion, that might not be happening, since the simplest recursive call must be resolved first
   if ($stillDue > 0.0001) {
-    // at this point, exact change cannot be given:
-    // any bills or coins remaining in the till will be bigger than the amount due to the customer
-    console.log($stillDue +' = still due after recursion');
-    console.log({ status: 'INSUFFICIENT_FUNDS', change: [] });
+    // At this point, exact change cannot be given:
+    // any bills or coins remaining in the till will be bigger than the amount due to the customer.
     return { status: 'INSUFFICIENT_FUNDS', change: [] };
+  } else {
+    // At this point, the exact amount of change is given to the customer and the till is ready for the next transaction
+    return { status: 'OPEN', change: changePile };
   }
-  // at this point, the exact amount of change is given to the customer and the till is ready for the next transaction
-  console.log({ status: 'OPEN', change: changePile });
-  return { status: 'OPEN', change: changePile };
 }
 
 // checkCashRegister(19.5, 20, [
@@ -154,26 +137,3 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
 //   ['TWENTY', 60],
 //   ['ONE HUNDRED', 100],
 // ]);
-///////////////////////////////////////////////////////////////////
-
-// checkCashRegister(3.26, 100, [
-//   ["PENNY", 1.01], 
-//   ["NICKEL", 2.05], 
-//   ["DIME", 3.1], 
-//   ["QUARTER", 4.25], 
-//   ["ONE", 90], 
-//   ["FIVE", 55], 
-//   ["TEN", 20], 
-//   ["TWENTY", 60], 
-//   ["ONE HUNDRED", 100]
-// ]) 
-
-// should return {status: "OPEN", change: [
-//   ["TWENTY", 60], 
-//   ["TEN", 20], 
-//   ["FIVE", 15], 
-//   ["ONE", 1], 
-//   ["QUARTER", 0.5], 
-//   ["DIME", 0.2], 
-//   ["PENNY", 0.04]
-// ]}.
