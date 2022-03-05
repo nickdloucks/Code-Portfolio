@@ -121,6 +121,8 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
     ///////////////////////////////////////
   }
   ///////// BUG LIKELY BELOW: RETURNING INSUFFICEINT FUNDS WHEN THERE'S MORE THAN ENOUGH IN THE TILL....
+  // possible problem with $stillDue being an alias passed into recursive function? it needs to actually mutate the variable
+  // but with recursion, that might not be happening, since the simplest recursive call must be resolved first
   if ($stillDue > 0) {
     // at this point, exact change cannot be given:
     // any bills or coins remaining in the till will be bigger than the amount due to the customer
