@@ -28,8 +28,7 @@ function telephoneCheck(phone: string): boolean {
   if (areaCode) {
     // this block is for when the area code is surrounded by parentheses (on both sides, facing the proper direction)
     let extraChars = start.replace(parens, ''); // ignore the country code, area code, parentheses and spacing characters since they are valid at this point
-    let final = extraChars.length ? false : true; // if any characters remain, the input is NOT a valid US phone number
-    return final;
+    return extraChars.length ? false : true; // if any characters remain, the input is NOT a valid US phone number
   } else {
     // this block is for when the area code does NOT have parentheses
     let noParens = /1?[- .]?\d{3}[- .]?/; // regex for if the phone number does NOT use parentheses around the area code
@@ -38,8 +37,7 @@ function telephoneCheck(phone: string): boolean {
 
     if (areaCode2) {
       let extraChars = start.replace(noParens, '');
-      let final = extraChars.length ? false : true;
-      return final;
+      return extraChars.length ? false : true;
     }
   }
   /* NOTE: If there is the wrong number of parentheses, or they are in the wrong place, or they face the wrong direction,
