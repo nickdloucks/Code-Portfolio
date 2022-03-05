@@ -55,8 +55,10 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   }
   let totalTill = tillCount(cid); // represents the total money value in the till
 
+  console.log($stillDue + ' = still due BEFORE recursion');
+
   //==== MAIN BODY OF ALGORITHM ============
-  if (totalTill < $stillDue) {
+  if (totalTill < $stillDue) { // Not enough money left in the till to make change for this cash amount.
     return { status: 'INSUFFICIENT_FUNDS', change: [] };
   } else if (totalTill === $stillDue) {
     // customer is owed the exact ammount of change in the till
@@ -65,8 +67,8 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   } else {
     // when totalTill > $stillDue
     ////////////////////////////////////////////////////////////////////////////////////
-    function recurseCount(owed_$: number, index_$: number): void {
-      if (owed_$ == 0 || index_$ < 0) {
+    function recurseCount(owed_$: number = $stillDue, index_$: number): void {
+      if (owed_$ === 0 || index_$ < 0) {
         return;
       } // Stop recursion if no more money is owed,
       // or there are no more types/units of money that could be given out for the remainder
@@ -74,7 +76,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
       let slotVal: number = cid[index_$][1] as number; // alias for total value of the money in the current bill/coin slot
       let unitVal: number = MONEY[index_$][1] as number; // alias for unit value of current bill/coin
 
-      if (!slotVal || owed_$ < unitVal) {
+      if (slotVal == 0 || owed_$ < unitVal) {
         // no $ in current slot, or the current denomination/unit size is too big to give out
         recurseCount(owed_$, index_$ - 1); // move on to next-biggest money slot
         return;
@@ -95,11 +97,8 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
         let maxFromSlot = owed_$ - remainder; // max possible value of $ to be given from this slot (example: how much change in $1 bills if 1.00 is the current unitVal)
 
         let unitCount = 0;
-        while (
-          unitCount < slotVal / unitVal &&
-          unitCount < maxFromSlot / unitVal
-        ) {
-          // *****count how many  instances of the current bill you can give out
+        while ((unitCount < slotVal / unitVal) && (unitCount < maxFromSlot / unitVal)) {
+          // *****count how many instances of the current bill you can give out
           unitCount += 1;
         }
 
@@ -110,7 +109,11 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
         remainder += maxFromSlot - giveFromSlot; // if there wasn't enough in the slot to give out the maximum possible,
         // then add the difference to the remainder and recurse on the remainder
 
-        recurseCount(remainder, index_$ - 1);
+        $stillDue = remainder; // BUG SQUASHED! recursing on the remainder w/o first mutating $stillDue decoupled the process from 
+        //what was actually still owed to the customer, thus the program would never think it had given out enough change.
+        // setting $stillDue equal to <remainder> fixes that.
+
+        recurseCount($stillDue, index_$ - 1);
         return;
       }
       console.log(...changePile);
@@ -126,6 +129,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   if ($stillDue > 0) {
     // at this point, exact change cannot be given:
     // any bills or coins remaining in the till will be bigger than the amount due to the customer
+    console.log($stillDue +' = still due after recursion');
     console.log({ status: 'INSUFFICIENT_FUNDS', change: [] });
     return { status: 'INSUFFICIENT_FUNDS', change: [] };
   }
@@ -134,14 +138,14 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   return { status: 'OPEN', change: changePile };
 }
 
-checkCashRegister(19.5, 20, [
-  ['PENNY', 1.01],
-  ['NICKEL', 2.05],
-  ['DIME', 3.1],
-  ['QUARTER', 4.25],
-  ['ONE', 90],
-  ['FIVE', 55],
-  ['TEN', 20],
-  ['TWENTY', 60],
-  ['ONE HUNDRED', 100],
-]);
+// checkCashRegister(19.5, 20, [
+//   ['PENNY', 1.01],
+//   ['NICKEL', 2.05],
+//   ['DIME', 3.1],
+//   ['QUARTER', 4.25],
+//   ['ONE', 90],
+//   ['FIVE', 55],
+//   ['TEN', 20],
+//   ['TWENTY', 60],
+//   ['ONE HUNDRED', 100],
+// ]);
