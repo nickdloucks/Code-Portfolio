@@ -1,5 +1,5 @@
-import {default as AbstractNode} from '../libs/data-structures/a-node.mjs';
-import LinkedList from '../libs/data-structures/linked-list.mjs';
+import AbstractNode from '../data-structures/a-node.mjs';
+import LinkedList from '../data-structures/linked-list.mjs';
 
 describe("Abstract Node Class", ()=>{
     let newNode = new AbstractNode('pizza');

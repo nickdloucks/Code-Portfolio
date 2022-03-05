@@ -1,5 +1,5 @@
-import AbstractNode from '../libs/data-structures/a-node.mjs';
-import {default as LinkedList} from '../libs/data-structures/linked-list.mjs';
+import AbstractNode from '../data-structures/a-node.mjs';
+import LinkedList from '../data-structures/linked-list.mjs';
 
 describe("LinkedList suite.",()=>{
     // TESTING SAMPLE DATA. CONTEXT:
