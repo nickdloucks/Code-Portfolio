@@ -44,13 +44,17 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
     ['ONE HUNDRED', 100.0],
   ]; // The MONEY array represents the value of one of a given bill or coin
 
+  function precise(decimal: number): number {
+    return Math.round(100 * decimal) / 100;
+  }
+
   //// Till COUNTING SUBROUTINE:
   function tillCount(arr2D: Array<Array<string | number>>) {
     let counter: number = 0;
     for (let i = 0; i < arr2D.length; i++) {
       counter += arr2D[i][1] as number;
     }
-    counter = Math.round(100 * counter) / 100; // this extra step helps maintain accuracy of floats in Javascript
+    counter = precise(counter); // this extra step helps maintain accuracy of floats in Javascript
     return counter;
   }
   let totalTill = tillCount(cid); // represents the total money value in the till
@@ -87,7 +91,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
       if (owed_$ == unitVal) {
         // 1 EXACT UNIT-POP SUBROUTINE
         // the ammount stillowed$ is equal to the unit value of the current bill/coin
-        changePile.unshift([type_$, owed_$]); // add the $ name and value to the change pile to be given to customer
+        changePile.push([type_$, owed_$]); // add the $ name and value to the change pile to be given to customer
         (cid[index_$][1] as number) -= owed_$; // remove from till
         return;
       } else if (owed_$ > unitVal) {
@@ -104,7 +108,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
 
         let giveFromSlot = unitCount * unitVal;
 
-        changePile.unshift([type_$, giveFromSlot]); // add the change to the pile to be given to the customer
+        changePile.push([type_$, giveFromSlot]); // add the change to the pile to be given to the customer
         (cid[index_$][1] as number) -= giveFromSlot; // remove from till
         remainder += maxFromSlot - giveFromSlot; // if there wasn't enough in the slot to give out the maximum possible,
         // then add the difference to the remainder and recurse on the remainder
@@ -112,6 +116,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
         $stillDue = remainder; // BUG SQUASHED! recursing on the remainder w/o first mutating $stillDue decoupled the process from 
         //what was actually still owed to the customer, thus the program would never think it had given out enough change.
         // setting $stillDue equal to <remainder> fixes that.
+        $stillDue = precise($stillDue); // keep the decimal numbers precise
 
         recurseCount($stillDue, index_$ - 1);
         return;
@@ -126,7 +131,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
   ///////// BUG LIKELY BELOW: RETURNING INSUFFICEINT FUNDS WHEN THERE'S MORE THAN ENOUGH IN THE TILL....
   // possible problem with $stillDue being an alias passed into recursive function? it needs to actually mutate the variable
   // but with recursion, that might not be happening, since the simplest recursive call must be resolved first
-  if ($stillDue > 0) {
+  if ($stillDue > 0.0001) {
     // at this point, exact change cannot be given:
     // any bills or coins remaining in the till will be bigger than the amount due to the customer
     console.log($stillDue +' = still due after recursion');
@@ -149,3 +154,26 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
 //   ['TWENTY', 60],
 //   ['ONE HUNDRED', 100],
 // ]);
+///////////////////////////////////////////////////////////////////
+
+// checkCashRegister(3.26, 100, [
+//   ["PENNY", 1.01], 
+//   ["NICKEL", 2.05], 
+//   ["DIME", 3.1], 
+//   ["QUARTER", 4.25], 
+//   ["ONE", 90], 
+//   ["FIVE", 55], 
+//   ["TEN", 20], 
+//   ["TWENTY", 60], 
+//   ["ONE HUNDRED", 100]
+// ]) 
+
+// should return {status: "OPEN", change: [
+//   ["TWENTY", 60], 
+//   ["TEN", 20], 
+//   ["FIVE", 15], 
+//   ["ONE", 1], 
+//   ["QUARTER", 0.5], 
+//   ["DIME", 0.2], 
+//   ["PENNY", 0.04]
+// ]}.
