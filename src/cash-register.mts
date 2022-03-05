@@ -19,14 +19,14 @@ interface TillStatus {
 }
 
 export default function checkCashRegister(price: number, cash: number, cid: Array<Array<string | number>>): TillStatus {
-  if (price % 0.001 > 0 || cash % 0.001 > 0) {
-    // Edge case: input of money values < 1 cent
-    return {
-      status: 'ERROR',
-      change: null,
-      message: 'Please  round to the nearest cent and try again.',
-    };
-  }
+  // if (price % 0.001 > 0 || cash % 0.001 > 0) {
+  //   // Edge case: input of money values < 1 cent
+  //   return {
+  //     status: 'ERROR',
+  //     change: null,
+  //     message: 'Please  round to the nearest cent and try again.',
+  //   };
+  // } // THE HANDLING OF THIS EDGE CASE WAS NOT WORKING, RETURNED ERROR WITH 50 CENTS DUE...
 
   let $stillDue = cash - price; // Init. variable: amount of money the customer is still owed
   let changePile: Array<Array<string | number>> = []; // itemized breakdown of change to be given to the customer
@@ -120,6 +120,7 @@ export default function checkCashRegister(price: number, cash: number, cid: Arra
     recurseCount($stillDue, 8);
     ///////////////////////////////////////
   }
+  ///////// BUG LIKELY BELOW: RETURNING INSUFFICEINT FUNDS WHEN THERE'S MORE THAN ENOUGH IN THE TILL....
   if ($stillDue > 0) {
     // at this point, exact change cannot be given:
     // any bills or coins remaining in the till will be bigger than the amount due to the customer
