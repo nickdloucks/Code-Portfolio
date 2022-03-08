@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "preLaunchTask": "tsc: build - tsconfig.json",
-            "program": "${workspaceFolder}\\build\\cash-register.js"
+            "program": "${workspaceFolder}\\build\\cash-register.mjs"
         }
     ]
 }
