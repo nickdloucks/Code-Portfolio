@@ -6,7 +6,7 @@
  * @returns The string in Pig-Latin.
  */
 
-function translatePigLatin(str: string): string {
+export default function translatePigLatin(str: string): string {
   let nStr = str; // save copy of input string to avoid mutation
   const consonants = /(^[bcdfghjklmnpqrstvwxyz]+)?/i; // regex checking whether the string begins with one or more consonants
   let match: RegExpMatchArray | null = nStr.match(consonants);
