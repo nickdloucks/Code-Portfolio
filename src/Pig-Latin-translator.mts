@@ -11,7 +11,9 @@ export default function translatePigLatin(str: string): string {
     return str;
   }
   let nStr = str; // save copy of input string to avoid mutation
+  const cap = /^[A-Z]/; // regex for if teh first letter is capitalized
   const consonants = /(^[bcdfghjklmnpqrstvwxyz]+)?/i; // regex checking whether the string begins with one or more consonants
+  const twoFirst = /(^[th])|^([qu])|^([ch])|^([sh])|^([pt])?/i; // regex for inseparable pairs of consonants at beginning
   const possesive = /(\'s)$|(s\')$/;
   let possPop: string | undefined;
   if (possesive.test(nStr)) { // If there is a substring at the end indicating posession,

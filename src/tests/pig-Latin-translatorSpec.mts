@@ -16,15 +16,13 @@ describe('A function for translating English to Pig Latin.', ()=>{
         // NOT YET IMPLEMENTED IN PROGRAM
     });
 
-    xit('Moves "qu" as one unit from the beginning of words.', ()=>{
+    xit('Moves double-letter sounds ["qu", "ch", "th", "pt", "sh"] as one unit from the beginning of words.', ()=>{
         expect(toPigLatin('quack')).toEqual('ackquay');
         expect(toPigLatin('question')).toEqual('estionquay');
-        // NOT YET IMPLEMENTED IN PROGRAM
-    });
-
-    xit('Moves "th" as one unit from the beginning of words.', ()=>{
-        expect(toPigLatin('that')).toEqual('atthay');
-        expect(toPigLatin('this')).toEqual('isthay');
+        expect(toPigLatin('should')).toEqual('ouldshay');
+        expect(toPigLatin('there')).toEqual('erethay');
+        expect(toPigLatin('pterodactyl')).toEqual('erodactylptay');
+        expect(toPigLatin('change')).toEqual('angechay');
         // NOT YET IMPLEMENTED IN PROGRAM
     });
 
