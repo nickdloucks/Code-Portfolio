@@ -7,6 +7,9 @@
  */
 
 export default function translatePigLatin(str: string): string {
+  if (str === ' ' || !str){
+    return str;
+  }
   let nStr = str; // save copy of input string to avoid mutation
   const consonants = /(^[bcdfghjklmnpqrstvwxyz]+)?/i; // regex checking whether the string begins with one or more consonants
   const possesive = /(\'s)$|(s\')$/;
