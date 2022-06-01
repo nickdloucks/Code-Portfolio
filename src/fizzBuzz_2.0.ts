@@ -5,7 +5,7 @@
  * if number is divisible by both 3 and 5, print "fizzbuzz" instead of the number.
  */
 
-let nums = Array.from({ length: 100 }, function (_, index) {
+let nums: Array<number | string> = Array.from({ length: 100 }, function (_, index: number) {
   // initialize array of length 100, callback populates values
   let num: number = index + 1; // start Array at 1 instead of 0
   let fbStr: string = '';
