@@ -1,6 +1,6 @@
-import {default as binarySearch} from "../algorithms/binary-search";
+import { default as binarySearch } from '../algorithms/binary-search.mjs';
 
-describe("A funtion used to search through sorted data for a target value.", ()=>{
+describe("A funtion used to search through sorted data for a target value. Runs in logarithmic time.", ()=>{
     
     // TEST CASES, SAMPLE DATA:
     let primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 
