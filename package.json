@@ -18,6 +18,7 @@
   ],
   "author": "Nick Loucks",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/nickdloucks/Code-Exercises/issues"
   },
