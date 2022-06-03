@@ -1,7 +1,7 @@
 /**
  * Binary Search implementation: Returns the index of the target value in the array,
  * or -1 if the targetValue is not present.
- * @param array : Array<number> => Numeric data to search through.
+ * @param array : Array<number> => Sorted (ascending), numeric data to search through.
  * @param targetValue : number => Target value.
  * @returns : number => Index of target value, or -1 if target value not found.
  */
