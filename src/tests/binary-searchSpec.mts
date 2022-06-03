@@ -1,4 +1,4 @@
-import binarySearch from "../algorithms/binary-search";
+import {default as binarySearch} from "../algorithms/binary-search";
 
 describe("A funtion used to search through sorted data for a target value.", ()=>{
     
