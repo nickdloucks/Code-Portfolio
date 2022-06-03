@@ -4,7 +4,7 @@
 const binarySearch = function(array, targetValue) {
 	let min = 0; // min and max will define the ever-narrowing search range over the input
 	let max = array.length - 1;
-    let guess;
+    let guess; // An index: compare the value at this location to the targetValue
     while(max >= min){
         guess = Math.floor((max + min) / 2); // always guess the middle of the current search range
         if(array[guess] < targetValue){
