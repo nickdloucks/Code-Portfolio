@@ -1,7 +1,7 @@
 import AbstractNode from '../data-structures/a-node.mjs';
 import LinkedList from '../data-structures/linked-list.mjs';
 
-describe("Abstract Node Class", ()=>{
+xdescribe("Abstract Node Class", ()=>{
     let newNode = new AbstractNode('pizza');
 
     it("initializes and returns value properly.", ()=>{
