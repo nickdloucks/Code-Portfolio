@@ -4,9 +4,12 @@
  * @param nth : number => Get any fibonacci number by it's place in the sequence.
  * @returns 
  */
-function calcNthFib(nth : number, all?: boolean): number{ // provide the target position of a fibonacci number in the sequence
+
+let memo: number[] = [0, 1, 1];
+
+export default function calcNthFib(nth : number, all?: boolean): number{ // provide the target position of a fibonacci number in the sequence
     // optional <all> param is for requesting the list of fibonacci numbers up to the specified position
-    let memo: number[] = [0, 1, 1];
+    
     let nthFib : number = nth;
 
     if(nthFib <= 1){ // no inputs should be less than 1, and the first fibonacci number is 0
