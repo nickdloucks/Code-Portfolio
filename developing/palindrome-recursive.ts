@@ -7,19 +7,37 @@ export default function palindromeRecursive(str: string): boolean{
         return true; // if the input is an empty string or a single character, 
         // then it is the same backwards and forwards, so it's a palindrome
     }
-    
-    let nStr = str; // copy input to avoid mutation outside the scope of this function
+    function initialValidation(input: string): string{
+        let validStr = input.toLowerCase(); // copy input to avoid mutation outside the scope of this function
+        // store as lower-case string in order to disregard letter case
 
-    function compareEdges(word: string): boolean{
-        // determines whether the first and last character match
-        return(word.charAt(0) === word.charAt(word.length - 1)) ? true : false;
+        let noPunc = /[^a-z0-9]/gi; //regex for non-word characters like punctuation or spaces (ignore case)
+        let badChars = noPunc.test(validStr); // test the input for characters to ignore, like punctuation.
+
+        // if there are "bad" characters, replace them with an empty string, effectively deleting them from the <validStr>
+        return (badChars) ? validStr.replace(noPunc, '') : validStr;
     }
 
-    if(compareEdges(nStr)){
-        // if first and last char match, move inward towards the middle of the string and recurse
-        nStr = nStr.slice(1, nStr.length - 1);
-        return palindromeRecursive(nStr);
+    let nStr = initialValidation(str); // validate the copy once so the recursion doesn't repeadedly re-validate
+
+    function recurse(input: string){
+        if(!str.length || str.length === 1){
+            return true; // base case: same as above ^
+        }
+
+        function compareEdges(word: string): boolean{
+            // determines whether the first and last character match
+            return(word.charAt(0) === word.charAt(word.length - 1)) ? true : false;
+        }
+
+        if(compareEdges(nStr)){
+            // if first and last char match, move inward towards the middle of the string and recurse
+            nStr = nStr.slice(1, nStr.length - 1);
+            return recurse(nStr);
+        }
+        //if the first and last characters do not match, it is not a palindrome
+        return false;
     }
-    //if the first and last characters do not match, it is not a palindrome
-    return false;
+
+    return recurse(nStr);
 }
