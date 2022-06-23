@@ -21,7 +21,7 @@ export default function palindromeRecursive(str: string): boolean{
     let nStr = initialValidation(str); // validate the copy once so the recursion doesn't repeadedly re-validate
 
     function recurse(input: string){
-        if(!str.length || str.length === 1){
+        if(!input.length || input.length === 1){
             return true; // base case: same as above ^
         }
 
@@ -30,10 +30,10 @@ export default function palindromeRecursive(str: string): boolean{
             return(word.charAt(0) === word.charAt(word.length - 1)) ? true : false;
         }
 
-        if(compareEdges(nStr)){
+        if(compareEdges(input)){
             // if first and last char match, move inward towards the middle of the string and recurse
-            nStr = nStr.slice(1, nStr.length - 1);
-            return recurse(nStr);
+            input = input.slice(1, input.length - 1);
+            return recurse(input);
         }
         //if the first and last characters do not match, it is not a palindrome
         return false;
