@@ -35,9 +35,10 @@ export default function palindromeRecursive(str: string): boolean{
             // if first and last char match, move inward towards the middle of the string and recurse
             input = input.slice(1, input.length - 1);
             return recurse(input);
+        } else{
+            //if the first and last characters do not match, it is not a palindrome
+            return false;
         }
-        //if the first and last characters do not match, it is not a palindrome
-        return false;
     }
 
     return recurse(nStr);
