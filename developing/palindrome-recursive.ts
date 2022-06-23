@@ -8,7 +8,7 @@ export default function palindromeRecursive(str: string): boolean{
         // then it is the same backwards and forwards, so it's a palindrome
     }
     
-    let nStr = str; // copy input to avoid mutation
+    let nStr = str; // copy input to avoid mutation outside the scope of this function
 
     function compareEdges(word: string): boolean{
         // determines whether the first and last character match
@@ -20,6 +20,6 @@ export default function palindromeRecursive(str: string): boolean{
         nStr = nStr.slice(1, nStr.length - 1);
         return palindromeRecursive(nStr);
     }
-
+    //if the first and last characters do not match, it is not a palindrome
     return false;
 }
