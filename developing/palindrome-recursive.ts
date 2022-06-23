@@ -7,6 +7,7 @@ export default function palindromeRecursive(str: string): boolean{
         return true; // if the input is an empty string or a single character, 
         // then it is the same backwards and forwards, so it's a palindrome
     }
+
     function initialValidation(input: string): string{
         let validStr = input.toLowerCase(); // copy input to avoid mutation outside the scope of this function
         // store as lower-case string in order to disregard letter case
@@ -22,7 +23,7 @@ export default function palindromeRecursive(str: string): boolean{
 
     function recurse(input: string){
         if(!input.length || input.length === 1){
-            return true; // base case: same as above ^
+            return true; // base case: same as above ^ (needed for when the middle of the input is reached)
         }
 
         function compareEdges(word: string): boolean{
