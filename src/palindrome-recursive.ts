@@ -21,7 +21,7 @@ export default function palindromeRecursive(str: string): boolean{
 
     let nStr = initialValidation(str); // validate the copy once so the recursion doesn't repeadedly re-validate
 
-    function recurse(input: string){
+    function recurse(input: string): boolean{
         if(!input.length || input.length === 1){
             return true; // base case: same as above ^ (needed for when the middle of the input is reached)
         }
