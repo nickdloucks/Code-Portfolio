@@ -2,7 +2,7 @@
  * A dynamic program to calculate fibonacci numbers with memoization. 
  * It will be used in the "Sum-Odd-Fibonacci" program in this repo once it is finished.
  * @param nth : number => Get any fibonacci number by it's place in the sequence.
- * @returns 
+ * @returns : number
  */
 
 let memo: number[] = [0, 1, 1];
@@ -12,10 +12,11 @@ export default function calcNthFib(nth : number, all?: boolean): number{ // prov
     
     let nthFib : number = nth;
 
-    if(nthFib <= 1){ // no inputs should be less than 1, and the first fibonacci number is 0
+    if((nthFib % 1) || (nthFib <= 0)){
+        return -1; // non-integer inputs or 0 are invalid
+    }else if(nthFib <= 1){ // no inputs should be less than 1, and the first fibonacci number is 0
         return memo[0];
-    }
-    if(nthFib <= 3){ // the second and third fibonnaci number are both 1
+    }else if(nthFib <= 3){ // the second and third fibonnaci number are both 1
         return 1;
     }else{
         let twoBeforeNth = memo[nthFib - 3]; // it's -3 to account for zero-based indexing of the memo array. 
