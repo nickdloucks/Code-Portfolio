@@ -1,4 +1,4 @@
-import { default as isPalindrome } from '../palindrome-recursive';
+import { default as isPalindrome } from '../algorithms/dynamic-programming/palindrome-recursive';
 
 describe("The Palindrome checker", () => {
   it("correctly checks 'racecar' input", ()=>{
