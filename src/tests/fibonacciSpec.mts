@@ -1,4 +1,4 @@
-import { default as getFibonacci } from '../algorithms/dynamic-programming/Fibonacci';
+import { default as getFibonacci } from '../algorithms/dynamic-programming/Fibonacci.mjs';
 
 describe("The program for getting a number by position in the Fobonacci sequence", ()=>{
     it('returns the number at the specified position in the sequence.', ()=>{
