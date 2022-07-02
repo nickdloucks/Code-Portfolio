@@ -1,6 +1,11 @@
-// recursive version of palindrome checker
-// this version does not yet account for differences in capitalization nor spaces between words
-// future versions will be useable on sentances, not just single words, and will ignore letter case
+/**
+ * Recursively checks whether an input string is the same backwards as worwards.
+ * It ignores letter case, punctuation characters, and spaces. 
+ * It can be used directly on a sentence with no need to be passed as a callback funtion to an iterator.
+ * @param str : string => The string you want to check
+ * @returns : boolean => true if palindrome, false if not
+ */
+
 
 export default function palindromeRecursive(str: string): boolean{
     if(!str.length || str.length === 1){
